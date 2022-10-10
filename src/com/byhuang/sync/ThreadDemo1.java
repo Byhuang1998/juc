@@ -29,6 +29,24 @@ public class ThreadDemo1 {
                 }
             }
         }, "B").start();
+        new Thread(() -> {
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.add();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "C").start();
+        new Thread(() -> {
+            for (int i = 0; i <= 10; i++) {
+                try {
+                    share.sub();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "D").start();
     }
 }
 
@@ -36,7 +54,7 @@ class Share {
     private int number = 0;
 
     public synchronized void add() throws InterruptedException {
-        if (number != 0) {
+        while (number != 0) {
             this.wait();
         }
         number++;
@@ -46,7 +64,7 @@ class Share {
 
     public synchronized void sub() throws InterruptedException {
 
-        if (number != 1) {
+        while (number != 1) {
             this.wait();
         }
         number--;
