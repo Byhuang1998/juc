@@ -41,3 +41,5 @@ public class DeadLock {
         }, "B").start();
     }
 }
+// jps -l command: like ps -ef, to show java process status
+// jstack pid i.e. jstack 18116
