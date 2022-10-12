@@ -3,6 +3,7 @@ package com.byhuang.lock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author mskj-huangbingyi
@@ -15,7 +16,9 @@ public class ThreadDemo6 {
 
     public static void main(String[] args) {
 
-        Map<Integer, String> map = new HashMap<>();
+//        Map<Integer, String> map = new HashMap<>();
+
+        Map<Integer, String> map = new ConcurrentHashMap<>();
         for (int i = 0; i < 30; i++) {
             int finalI = i;
             new Thread(() -> {
